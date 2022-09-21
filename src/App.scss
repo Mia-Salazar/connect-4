@@ -1,4 +1,19 @@
 .connect {
-    height: calc(100vh - 130px);;
-    margin-top: 90px;
+    height: calc(100vh - 100px);;
+    margin-top: 85px;
+    padding: 15px;
+}
+
+.board {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.card {
+    height: 83px;
+}
+
+.alert {
+    padding: 10px;
 }
