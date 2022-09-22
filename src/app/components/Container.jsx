@@ -10,7 +10,7 @@ export const Container = () => {
     const createGrid = () => {
         let newArray = [];
         for(let i = 0; i < 6; i++) {
-            newArray.push(new Array(7));
+            newArray.push(new Array(7));  
         }
         setGrid(newArray);
     }
@@ -27,7 +27,7 @@ export const Container = () => {
                     return <Cell key={i} index={i} />
                 })}
             </section>
-            <ColumnsButton setUser={setUser} user={user}/>
+            <ColumnsButton setUser={setUser} user={user} grid={grid} setGrid={setGrid}/>
         </main>
 	);
 };
