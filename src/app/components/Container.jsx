@@ -9,7 +9,7 @@ export const Container = () => {
             {!user && <div className="alert alert-danger">Player 2 turn</div>}
             <section className="board">
                 {[...Array(42)].map((e, i) => {
-                    return <Cell key={i} />
+                    return <Cell key={i} index={i} />
                 })}
             </section>
         </main>
