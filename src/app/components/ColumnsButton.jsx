@@ -5,7 +5,7 @@ export const ColumnsButton = ({setUser, user, grid, setGrid}) => {
         let column = event.target.outerText - 1;
         let newGrid = [...grid];
         for(let i = 5; i >= 0; i--) {
-            if(!newGrid[i][column]) {
+            if(newGrid[i][column] === "") {
                 newGrid[i][column] = user ? 'X' : 'O';
                 break;
             }
