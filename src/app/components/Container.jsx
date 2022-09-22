@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Cell from "./Cell";
+import ColumnsButton from "./ColumnsButton";
 
 export const Container = () => {
     const [user, setUser] = useState(true)
@@ -12,6 +13,7 @@ export const Container = () => {
                     return <Cell key={i} index={i} />
                 })}
             </section>
+            <ColumnsButton />
         </main>
 	);
 };
