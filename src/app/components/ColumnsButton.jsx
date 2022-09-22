@@ -1,8 +1,9 @@
 import React from "react";
 
-export const ColumnsButton = () => {
+export const ColumnsButton = ({setUser, user}) => {
     const tokenLaunched = (event) => {
         console.log(event.target.outerText)
+        setUser(!user)
     }
 	return (
             <section className="columns-button">
