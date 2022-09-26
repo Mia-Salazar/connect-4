@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import Cell from "./Cell";
 import ColumnsButton from "./ColumnsButton";
+import Modal from "./Modal";
 
 export const Container = () => {
     const [lastToken, setLastToken] = useState(null);
     const [user, setUser] = useState(true);
     const [grid, setGrid] = useState([]);
+    const [winner, setWinner] = useState(false);
     const checkSurrounding = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [-1, 1], [0, -1], [-1, -1]];
 
     const createGrid = () => {
@@ -29,7 +31,7 @@ export const Container = () => {
         for(let directionIndex = 0; directionIndex < checkSurrounding.length; directionIndex++) {
             counter = loopCheck(currentPlayer, column, row, directionIndex, counter )
             if(counter >= 4) {
-                console.log('we have a winner')
+                setWinner(true);
                 break;
             }
         }
@@ -40,7 +42,6 @@ export const Container = () => {
         if(column + checkSurrounding[directionIndex][1] < 7 && column + checkSurrounding[directionIndex][1] >= 0
             && row + checkSurrounding[directionIndex][0] >= 0 && row + checkSurrounding[directionIndex][0] < 6) {
             if(grid[row + checkSurrounding[directionIndex][0]][column + checkSurrounding[directionIndex][1]] === currentPlayer) {
-                console.log('yep', counter)
                 return loopCheck(currentPlayer, column + checkSurrounding[directionIndex][1]
                     , row + checkSurrounding[directionIndex][0], directionIndex, counter + 1) + 1;
             }
@@ -59,6 +60,7 @@ export const Container = () => {
     }, [])
 	return (
 		<main className="paper container connect">
+            {winner && <Modal user={user} setWinner={setWinner}/>}
             {user && <div className="alert alert-secondary">Player 1 turn</div>}
             {!user && <div className="alert alert-danger">Player 2 turn</div>}
             <section className="board">
