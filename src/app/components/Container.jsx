@@ -60,7 +60,7 @@ export const Container = () => {
     }, [])
 	return (
 		<main className="paper container connect">
-            {winner && <Modal user={user} setWinner={setWinner}/>}
+            {winner && <Modal user={user} setWinner={setWinner} createGrid={createGrid} setUser={setUser}/>}
             {user && <div className="alert alert-secondary">Player 1 turn</div>}
             {!user && <div className="alert alert-danger">Player 2 turn</div>}
             <section className="board">
