@@ -1,5 +1,5 @@
 {
-  "homepage":"https://Mia-Salazar.github.io/connect-4",
+  "homepage": "https://Mia-Salazar.github.io/connect-4",
   "name": "connect",
   "version": "0.1.0",
   "private": true,
@@ -39,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
