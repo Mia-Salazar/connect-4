@@ -4,8 +4,10 @@ import Cell from "./Cell";
 import ColumnsButton from "./ColumnsButton";
 
 export const Container = () => {
-    const [user, setUser] = useState(true)
-    const [grid, setGrid] = useState([])
+    const [lastToken, setLastToken] = useState(null);
+    const [user, setUser] = useState(true);
+    const [grid, setGrid] = useState([]);
+    const checkSurrounding = [[-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [-1, 1], [0, -1], [-1, -1]];
 
     const createGrid = () => {
         let newArray = [];
@@ -17,6 +19,40 @@ export const Container = () => {
         }
         setGrid(newArray);
     }
+
+    const calculateScore = () => {
+        const currentPlayer = lastToken[2];
+        const column = lastToken[1];
+        const row = lastToken[0];
+        let counter = 1;
+
+        for(let directionIndex = 0; directionIndex < checkSurrounding.length; directionIndex++) {
+            counter = loopCheck(currentPlayer, column, row, directionIndex, counter )
+            if(counter >= 4) {
+                console.log('we have a winner')
+                break;
+            }
+        }
+    }
+
+    const loopCheck = (currentPlayer, column, row, directionIndex, counter) => {
+        if(counter >= 4) return 1;
+        if(column + checkSurrounding[directionIndex][1] < 7 && column + checkSurrounding[directionIndex][1] >= 0
+            && row + checkSurrounding[directionIndex][0] >= 0 && row + checkSurrounding[directionIndex][0] < 6) {
+            if(grid[row + checkSurrounding[directionIndex][0]][column + checkSurrounding[directionIndex][1]] === currentPlayer) {
+                console.log('yep', counter)
+                return loopCheck(currentPlayer, column + checkSurrounding[directionIndex][1]
+                    , row + checkSurrounding[directionIndex][0], directionIndex, counter + 1) + 1;
+            }
+        }
+        return 1;
+    }
+
+    useEffect(() => {
+        if(lastToken){
+            calculateScore();
+        }
+    }, [grid])
 
     useEffect(() => {
         createGrid();
@@ -45,7 +81,7 @@ export const Container = () => {
                     return <Cell key={i} index={i} element={e} />
                 })}
             </section>
-            <ColumnsButton setUser={setUser} user={user} grid={grid} setGrid={setGrid}/>
+            <ColumnsButton setUser={setUser} user={user} grid={grid} setGrid={setGrid} setLastToken={setLastToken}/>
         </main>
 	);
 };
